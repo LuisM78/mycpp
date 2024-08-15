@@ -11,7 +11,7 @@ int main() {
     int x = 5, y= 10;
     printf("Before swap = %d, y=%d\n",x, y);
     swap(&x,&y);
-    printf("After swap: x=%d, y= %d",x,y);
+    printf("After swap: x=%d, y= %d\n",x,y);
     return 0;
 
 }
