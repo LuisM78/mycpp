@@ -84,4 +84,35 @@ int main() {
 - **String Formatting:** `sprintf` is used to format a string by combining a character and its count into a temporary buffer.
 - **String Concatenation:** `strcat` is used to append the formatted string from the buffer to the result string `r`.
 
-This commented version and the explanation should help make the code more understandable for beginners in C programming. */
+This commented version and the explanation should help make the code more understandable for beginners in C programming.
+Great question! Let's break down why the line `char* r = (char*)malloc(2 * l * sizeof(char));` multiplies by `2 * l * sizeof(char)` and why you can't just use `2 * sizeof(char)`.
+
+### Purpose of `malloc`:
+The `malloc` function is used to allocate a block of memory dynamically. The amount of memory you need to allocate depends on the size and number of elements you want to store.
+
+### What is `2 * l * sizeof(char)`?
+- `l` is the length of the input string `s`, which represents the number of characters in the string.
+- `sizeof(char)` is the size of a single `char` in bytes. In C, this is typically `1` byte.
+- `2 * l` is an estimate of how much space you'll need to store the compressed version of the string, assuming that each character might be followed by a number (for example, `"a3b2"` would require 4 bytes for "a3" and 2 bytes for "b2").
+
+### Why Multiply by `2 * l`?
+In the worst-case scenario:
+- If the string is composed of distinct characters, each character would be followed by at least a `1` (e.g., `"abc"` would become `"a1b1c1"`).
+- Therefore, for every character in the original string (`l` characters), you need space for both the character and its count. So, you allocate `2 * l` bytes of space.
+
+### Why Not Just `2 * sizeof(char)`?
+- **`2 * sizeof(char)`** only allocates space for **2 characters**.
+- This is insufficient because your result string could be much longer. For example, if your input string is `"aaa"`, the compressed version would be `"a3"`, which requires at least 3 bytes of space (for the character 'a', the digit '3', and the null terminator `\0`).
+
+### Example:
+Consider the string `"aaabbccccdaa"`:
+- **Length (`l`)**: `12`
+- **Estimated Required Space**: `2 * l * sizeof(char) = 2 * 12 * 1 = 24` bytes.
+- The actual compressed string is `"a3b2c4d1a2"`, which is `11` characters long, so the `24` bytes provide ample space for this and any null terminator.
+
+### Summary:
+You multiply by `2 * l * sizeof(char)` to ensure there's enough memory allocated to hold the worst-case compressed version of the string, where each character is followed by a number. This ensures you don't run out of space when constructing the compressed string.
+
+
+
+ */
