@@ -87,8 +87,46 @@ int main() {
 This commented version and the explanation should help make the code more understandable for beginners in C programming.
 Great question! Let's break down why the line `char* r = (char*)malloc(2 * l * sizeof(char));` multiplies by `2 * l * sizeof(char)` and why you can't just use `2 * sizeof(char)`.
 
+
 ### Purpose of `malloc`:
 The `malloc` function is used to allocate a block of memory dynamically. The amount of memory you need to allocate depends on the size and number of elements you want to store.
+
+The line `sprintf(buffer, "%c%d", s[i - 1], ct);` is a crucial part of the code, and it performs string formatting. Let's break it down:
+
+### Components of the Line:
+- **`sprintf(buffer, ...)`**:
+  - `sprintf` is a function in C that works like `printf`, but instead of printing the formatted output to the console, it writes the formatted string into a character array (in this case, `buffer`).
+  - `buffer` is a character array that will store the resulting formatted string.
+
+- **`"%c%d"`**:
+  - This is the format string that tells `sprintf` how to format the output.
+  - `"%c"` is a placeholder for a single character.
+  - `"%d"` is a placeholder for an integer (in this case, the count of consecutive characters).
+
+- **`s[i - 1]`**:
+  - `s` is the input string.
+  - `s[i - 1]` refers to the character at index `i - 1` of the string `s`. This is the character that is being counted.
+
+- **`ct`**:
+  - `ct` is the count of how many times the character `s[i - 1]` has appeared consecutively in the string.
+
+### What the Line Does:
+- `sprintf(buffer, "%c%d", s[i - 1], ct);`:
+  - This line takes the character `s[i - 1]` and the count `ct` and combines them into a formatted string.
+  - For example, if `s[i - 1]` is `'a'` and `ct` is `3`, then this line will store the string `"a3"` into the `buffer`.
+
+### Example:
+Let's say the input string is `"aaabb"`, and the code is processing the second 'a' (i.e., `i = 2` and `ct = 3`):
+- `s[i - 1]` would be `'a'`.
+- `ct` would be `3`.
+- The line `sprintf(buffer, "%c%d", s[i - 1], ct);` would result in `buffer` containing the string `"a3"`.
+
+### Summary:
+- The `sprintf` function formats the string according to the provided format string `"%c%d"` and stores the result in the `buffer`.
+- This line is part of the process to build the compressed version of the input string, where consecutive characters and their counts are combined into a single string (e.g., `"a3"` for three consecutive 'a's).
+
+
+
 
 ### What is `2 * l * sizeof(char)`?
 - `l` is the length of the input string `s`, which represents the number of characters in the string.
