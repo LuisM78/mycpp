@@ -43,7 +43,7 @@ int main() {
     strcpy(str, "Dynamic string"); // Copy a string into the allocated memory
     printf("Dynamically allocated string: %s\n", str);
     free(str);                     // Free the dynamically allocated memory
-
+    printf("Freed the str memory with free(str) \n");
     // Allocate memory for an array of integers
     int *arr = (int *)malloc(5 * sizeof(int)); // Allocating space for an array of 5 integers
     if (arr == NULL) {
@@ -58,6 +58,8 @@ int main() {
         printf("Array element %d: %d\n", i, arr[i]);
     }
     free(arr); // Free the dynamically allocated memory for the array
+     
+    printf("Freed the arr memory with free(arr)\n");
 
     return EXIT_SUCCESS;
 }
